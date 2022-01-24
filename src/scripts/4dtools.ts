@@ -134,19 +134,39 @@ class Rotor4D {
   }
 
   /** Rotates the points by the rotation matrix */
-  rotate(points: number[][]): number[][] {
-    const rotatedPoints = points.map((row) => Array.from(row));
+  rotate(points: number[]): number[];
+  rotate(points: number[][]): number[][];
+  rotate(points: number[][] | number[]): number[][] | number[] {
+    // If points is a single point, return a single point
+    if (typeof points[0] === 'number') {
+      points = points as number[];
 
-    for (let i = 0; i < points[0].length; i++) {
+      const rotatedPoint = Array.from(points);
+
       for (let d = 0; d < 4; d++) {
-        rotatedPoints[d][i] = 0;
+        rotatedPoint[d] = 0;
         for (let j = 0; j < 4; j++) {
-          rotatedPoints[d][i] += this._rotationMatrix[d][j] * points[j][i];
+          rotatedPoint[d] += this._rotationMatrix[d][j] * points[j];
         }
       }
-    }
 
-    return rotatedPoints;
+      return rotatedPoint;
+    } else {
+      points = points as number[][];
+      // It's a list of points so return a list of points
+      const rotatedPoints = points.map((row) => Array.from(row));
+
+      for (let i = 0; i < points[0].length; i++) {
+        for (let d = 0; d < 4; d++) {
+          rotatedPoints[d][i] = 0;
+          for (let j = 0; j < 4; j++) {
+            rotatedPoints[d][i] += this._rotationMatrix[d][j] * points[j][i];
+          }
+        }
+      }
+
+      return rotatedPoints;
+    }
   }
 }
 
@@ -219,19 +239,39 @@ class Rotor3D {
   }
 
   /** Rotates the points by the rotation matrix */
-  rotate(points: number[][]): number[][] {
-    const rotatedPoints = points.map((row) => Array.from(row));
+  rotate(points: number[]): number[];
+  rotate(points: number[][]): number[][];
+  rotate(points: number[][] | number[]): number[][] | number[] {
+    // If points is a single point, return a single point
+    if (typeof points[0] === 'number') {
+      points = points as number[];
 
-    for (let i = 0; i < points[0].length; i++) {
+      const rotatedPoint = Array.from(points);
+
       for (let d = 0; d < 3; d++) {
-        rotatedPoints[d][i] = 0;
-        for (let j = 0; j < 4; j++) {
-          rotatedPoints[d][i] += this._rotationMatrix[d][j] * points[j][i];
+        rotatedPoint[d] = 0;
+        for (let j = 0; j < 3; j++) {
+          rotatedPoint[d] += this._rotationMatrix[d][j] * points[j];
         }
       }
-    }
 
-    return rotatedPoints;
+      return rotatedPoint;
+    } else {
+      points = points as number[][];
+      // It's a list of points so return a list of points
+      const rotatedPoints = points.map((row) => Array.from(row));
+
+      for (let i = 0; i < points[0].length; i++) {
+        for (let d = 0; d < 3; d++) {
+          rotatedPoints[d][i] = 0;
+          for (let j = 0; j < 3; j++) {
+            rotatedPoints[d][i] += this._rotationMatrix[d][j] * points[j][i];
+          }
+        }
+      }
+
+      return rotatedPoints;
+    }
   }
 }
 
