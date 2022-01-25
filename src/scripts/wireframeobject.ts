@@ -240,17 +240,19 @@ class WireframeObject extends HyperObject {
       // Update position
       this.meshes.edges[i].scale.z = length;
 
+      const newPosx = (vertex1[0] + vertex2[0]) / 2;
+      const newPosy = (vertex1[1] + vertex2[1]) / 2;
+      const newPosz = (vertex1[2] + vertex2[2]) / 2;
+
+      this.meshes.edges[i].position.set(newPosx, newPosy, newPosz);
+
       this.meshes.edges[i].lookAt(
         new THREE.Vector3(
-          vertex1[0] - vertex2[0],
-          vertex1[1] - vertex2[1],
-          vertex1[2] - vertex2[2]
+          vertex1[0] - vertex2[0] + newPosx,
+          vertex1[1] - vertex2[1] + newPosy,
+          vertex1[2] - vertex2[2] + newPosz
         )
       );
-
-      this.meshes.edges[i].position.x = (vertex1[0] + vertex2[0]) / 2;
-      this.meshes.edges[i].position.y = (vertex1[1] + vertex2[1]) / 2;
-      this.meshes.edges[i].position.z = (vertex1[2] + vertex2[2]) / 2;
 
       // Update colors
       // @ts-expect-error: Typescript doesn't know about our custom shader
