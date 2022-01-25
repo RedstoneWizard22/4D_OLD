@@ -19,6 +19,7 @@
     "jsxSingleQuote": true
   },
   "devDependencies": {
+    "@types/three": "^0.133.1",
     "@typescript-eslint/eslint-plugin": "^4.29.3",
     "@typescript-eslint/parser": "^4.29.3",
     "browserslist-generator": "^1.0.59",
@@ -47,13 +48,14 @@
     "svelte-loader": "^3.0.0",
     "svelte-preprocess": "^4.3.0",
     "tailwindcss": "^2.2.7",
+    "three": "^0.134.0",
     "ts-loader": "^8.0.4",
     "typescript": "^4.0.3",
     "webpack": "^5.16.0",
+    "webpack-bundle-analyzer": "^4.4.2",
     "webpack-merge": "^5.8.0",
     "webpack-nano": "^1.1.1",
-    "webpackbar": "^5.0.0-3",
-    "webpack-bundle-analyzer": "^4.4.2",
-    "webpack-plugin-serve": "^1.5.0"
+    "webpack-plugin-serve": "^1.5.0",
+    "webpackbar": "^5.0.0-3"
   }
 }
