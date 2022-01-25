@@ -7,6 +7,7 @@ class WireframeObject extends HyperObject {
   points3D!: number[][];
   visible: boolean;
   facesVisible: boolean;
+  castShadows: boolean;
   meshes: {
     vertices: THREE.Mesh[];
     edges: THREE.Mesh[];
@@ -20,6 +21,7 @@ class WireframeObject extends HyperObject {
     this.scene = scene;
     this.visible = true;
     this.facesVisible = true;
+    this.castShadows = true;
 
     this.meshes = {
       vertices: [],
@@ -60,6 +62,13 @@ class WireframeObject extends HyperObject {
     if (this.facesVisible) {
       this.meshes.faces.forEach((m) => (m.visible = visible));
     }
+  }
+
+  //** Toggles shadow casting for edge and vertex meshes */
+  setCastShadows(cast: boolean): void {
+    this.castShadows = cast;
+    this.meshes.vertices.forEach((m) => (m.castShadow = cast));
+    this.meshes.edges.forEach((m) => (m.castShadow = cast));
   }
 
   /** Creates meshes that make up the wireframe and adds them to scene */
@@ -190,6 +199,15 @@ class WireframeObject extends HyperObject {
     this.meshes.vertices.forEach((m) => this.scene.add(m));
     this.meshes.edges.forEach((m) => this.scene.add(m));
     this.meshes.faces.forEach((m) => this.scene.add(m));
+
+    // Set visibility of meshes to true
+    this.setVisible(true);
+
+    // Set visibility of faces
+    this.setFacesVisible(this.facesVisible);
+
+    // Set shadow casting for meshes
+    this.setCastShadows(this.castShadows);
   }
 
   /** Updates position and rotation of all meshes to the correct values */
