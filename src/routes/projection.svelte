@@ -10,7 +10,7 @@
   // let height: number, width: number;
   let canvasParent: HTMLElement;
   let animationFrame: number;
-
+  
   let scene: THREE.Scene,
     camera: THREE.PerspectiveCamera,
     renderer: THREE.WebGLRenderer;
